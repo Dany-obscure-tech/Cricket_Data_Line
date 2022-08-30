@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_cricket/Widgets/InfoWidget/ARSquad.dart';
+import 'package:my_cricket/Widgets/InfoWidget/BatSquad.dart';
+import 'package:my_cricket/Widgets/InfoWidget/BowlSquad.dart';
 
 import '../../Common/Constants.dart';
+import 'AllSquad.dart';
 import 'SquadEntry.dart';
 
 class SquadWidget extends StatelessWidget {
@@ -82,22 +86,11 @@ class SquadWidget extends StatelessWidget {
                                 height: MediaQuery.of(context).size.height /
                                     1.7, //height of TabBarView
                                 // color: whiteColor,
-                                child: TabBarView(children: <Widget>[
-                                  SingleChildScrollView(
-                                    child: Column(children: const [
-                                      SquadEntry(),
-                                      SquadEntry(),
-                                      SquadEntry(),
-                                      SquadEntry(),
-                                      SquadEntry(),
-                                      SquadEntry(),
-                                      SquadEntry(),
-                                      SquadEntry(),
-                                    ]),
-                                  ),
-                                  Text('Hello'),
-                                  Text('Hello'),
-                                  Text('Hello'),
+                                child: const TabBarView(children: <Widget>[
+                                  AllSquad(),
+                                  BatSquad(),
+                                  BowlSquad(),
+                                  ARSquad(),
                                 ]))
                           ]))
                 ],

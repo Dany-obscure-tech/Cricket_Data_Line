@@ -64,8 +64,16 @@ class _InfoWidgetState extends State<InfoWidget> {
                                 return const SquadWidget();
                               });
                         },
-                        child: SquadTab()),
-                    SquadTab(),
+                        child: const SquadTab()),
+                    GestureDetector(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (ctxt) {
+                                return const SquadWidget();
+                              });
+                        },
+                        child: const SquadTab()),
                   ],
                 ),
                 const SizedBox(
