@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../Common/Constants.dart';
 import '../Widgets/MatchCard.dart';
-import '../Widgets/MyTabBar.dart';
 
 class International extends StatefulWidget {
   const International({Key? key}) : super(key: key);
@@ -33,11 +31,7 @@ class _InternationalState extends State<International> {
               ],
             ),
           ),
-          GestureDetector(
-              onTap: () {
-                Get.to(() => const MyTabBar());
-              },
-              child: const MatchCard()),
+          const MatchCard(),
           const MatchCard(),
           const MatchCard(),
           Padding(

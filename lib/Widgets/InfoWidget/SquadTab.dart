@@ -5,7 +5,10 @@ import '../../Common/Constants.dart';
 class SquadTab extends StatefulWidget {
   const SquadTab({
     Key? key,
+    required this.name,
   }) : super(key: key);
+
+  final String name;
 
   @override
   State<SquadTab> createState() => _SquadTabState();
@@ -57,7 +60,7 @@ class _SquadTabState extends State<SquadTab> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text(
-                        'PAK',
+                        widget.name,
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                               fontSize: 12,
                             ),

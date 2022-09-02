@@ -9,7 +9,28 @@ import 'SquadWidget.dart';
 class InfoWidget extends StatefulWidget {
   const InfoWidget({
     Key? key,
+    required this.team1,
+    required this.team2,
+    required this.startTime,
+    required this.location,
+    required this.onFieldEmp1,
+    required this.onFieldEmp2,
+    required this.refree,
+    required this.tournament,
+    required this.category,
+    required this.date,
   }) : super(key: key);
+
+  final String team1;
+  final String team2;
+  final String startTime;
+  final String location;
+  final String onFieldEmp1;
+  final String onFieldEmp2;
+  final String refree;
+  final String tournament;
+  final String category;
+  final String date;
 
   @override
   State<InfoWidget> createState() => _InfoWidgetState();
@@ -64,7 +85,9 @@ class _InfoWidgetState extends State<InfoWidget> {
                                 return const SquadWidget();
                               });
                         },
-                        child: const SquadTab()),
+                        child: SquadTab(
+                          name: widget.team1,
+                        )),
                     GestureDetector(
                         onTap: () {
                           showDialog(
@@ -73,7 +96,9 @@ class _InfoWidgetState extends State<InfoWidget> {
                                 return const SquadWidget();
                               });
                         },
-                        child: const SquadTab()),
+                        child: SquadTab(
+                          name: widget.team2,
+                        )),
                   ],
                 ),
                 const SizedBox(
@@ -120,7 +145,7 @@ class _InfoWidgetState extends State<InfoWidget> {
                                       ),
                                 ),
                                 Text(
-                                  '2nd ODI, ODI, India tour of South Africa, 2021-22',
+                                  '2nd ${widget.category}, ${widget.category}, ${widget.tournament}, 2021-22',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
@@ -144,7 +169,7 @@ class _InfoWidgetState extends State<InfoWidget> {
                                       ),
                                 ),
                                 Text(
-                                  '2:00 PM, 21 Jan, 2022',
+                                  '${widget.startTime}, ${widget.date}',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
@@ -168,7 +193,7 @@ class _InfoWidgetState extends State<InfoWidget> {
                                       ),
                                 ),
                                 Text(
-                                  'Boland Park, Paarl, South Africa',
+                                  widget.location,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
@@ -192,7 +217,7 @@ class _InfoWidgetState extends State<InfoWidget> {
                                       ),
                                 ),
                                 Text(
-                                  'Adrian Holdstock(On Field), Marais Erasmus (on Field), Andy Pycroft(referee)',
+                                  '${widget.onFieldEmp1}(on Field), ${widget.onFieldEmp1}(on Field), ${widget.refree}(referee)',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
