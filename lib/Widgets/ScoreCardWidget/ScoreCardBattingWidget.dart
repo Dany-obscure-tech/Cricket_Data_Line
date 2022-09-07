@@ -3,11 +3,18 @@ import 'package:flutter/material.dart';
 import '../../Common/Constants.dart';
 import 'ScoreCardBattingEntryWIdget.dart';
 
-class ScoreCardBattingWidget extends StatelessWidget {
+class ScoreCardBattingWidget extends StatefulWidget {
   const ScoreCardBattingWidget({
     Key? key,
+    required this.teamPlayers,
   }) : super(key: key);
+  final Map teamPlayers;
 
+  @override
+  State<ScoreCardBattingWidget> createState() => _ScoreCardBattingWidgetState();
+}
+
+class _ScoreCardBattingWidgetState extends State<ScoreCardBattingWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -35,7 +42,7 @@ class ScoreCardBattingWidget extends StatelessWidget {
                       color: whiteColor),
                 ),
                 Text(
-                  'R',
+                  'B',
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                       fontSize: 9,
                       fontWeight: FontWeight.bold,
@@ -66,13 +73,32 @@ class ScoreCardBattingWidget extends StatelessWidget {
             ),
           ),
         ),
-        const ScoreCardBattingEntryWidget(),
-        const ScoreCardBattingEntryWidget(),
-        const ScoreCardBattingEntryWidget(),
-        const ScoreCardBattingEntryWidget(),
-        const ScoreCardBattingEntryWidget(),
-        const ScoreCardBattingEntryWidget(),
-        const ScoreCardBattingEntryWidget(),
+        Container(
+          height: 200,
+          child: ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: widget.teamPlayers.length,
+            itemBuilder: (BuildContext context, int index) {
+              String key = widget.teamPlayers.keys.elementAt(index);
+
+              return Column(
+                children: <Widget>[
+                  ScoreCardBattingEntryWidget(
+                    playerName: "${widget.teamPlayers[key]['name']}",
+                    runs: "${widget.teamPlayers[key]['runs']}",
+                    ballsFaced: "${widget.teamPlayers[key]['ballsFaced']}",
+                    fours: "${widget.teamPlayers[key]['fours']}",
+                    sixes: "${widget.teamPlayers[key]['sixes']}",
+                    isOut: "${widget.teamPlayers[key]['isOut']}" == 'true',
+                    isPlaying:
+                        "${widget.teamPlayers[key]['isPlaying']}" == 'true',
+                  ),
+                ],
+              );
+            },
+          ),
+        )
       ],
     );
   }

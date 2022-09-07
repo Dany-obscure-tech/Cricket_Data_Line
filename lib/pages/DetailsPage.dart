@@ -13,8 +13,8 @@ class _DetailsPageState extends State<DetailsPage> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: SingleChildScrollView(
-        child: MyTabBar(),
-      ),
+          // child: MyTabBar(),
+          ),
     );
   }
 }

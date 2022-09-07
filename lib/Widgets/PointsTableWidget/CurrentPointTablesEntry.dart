@@ -3,7 +3,22 @@ import 'package:flutter/material.dart';
 import '../../Common/Constants.dart';
 
 class CurrentPointTablesEntry extends StatefulWidget {
-  const CurrentPointTablesEntry({Key? key}) : super(key: key);
+  const CurrentPointTablesEntry(
+      {Key? key,
+      required this.name,
+      required this.matchPlayed,
+      required this.matchWin,
+      required this.matchLost,
+      required this.noResult,
+      required this.serialNo})
+      : super(key: key);
+
+  final String name;
+  final String matchPlayed;
+  final String matchWin;
+  final String matchLost;
+  final String noResult;
+  final String serialNo;
 
   @override
   State<CurrentPointTablesEntry> createState() =>
@@ -26,42 +41,42 @@ class _CurrentPointTablesEntryState extends State<CurrentPointTablesEntry> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    '1',
+                    widget.serialNo,
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
                         .copyWith(fontSize: 10, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    'KHT',
+                    widget.name,
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
                         .copyWith(fontSize: 10, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    '1',
+                    widget.matchPlayed,
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         fontSize: 10,
                         color: greyColor,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    '1',
+                    widget.matchWin,
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         fontSize: 10,
                         color: greyColor,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    '0',
+                    widget.matchLost,
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         fontSize: 10,
                         color: greyColor,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    '0',
+                    widget.noResult,
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         fontSize: 10,
                         color: greyColor,

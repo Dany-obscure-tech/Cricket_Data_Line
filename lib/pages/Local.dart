@@ -47,6 +47,13 @@ class _LocalState extends State<Local> {
               itemBuilder: (BuildContext context, DataSnapshot snapshot,
                   Animation<double> animation, int index) {
                 Map cards = snapshot.value as Map;
+                Map team1Player = cards['team1Players'] as Map;
+                Map team2Player = cards['team2Players'] as Map;
+                Map team1Bowlers = cards['team1Bowlers'] as Map;
+                Map team2Bowlers = cards['team2Bowlers'] as Map;
+                Map inning1Overs = cards['inning1Overs'] as Map;
+                Map inning2Overs = cards['inning2Overs'] as Map;
+
                 cards['key'] = snapshot.key;
 
                 return GestureDetector(
@@ -66,6 +73,14 @@ class _LocalState extends State<Local> {
                             referee: cards['referee'] ?? 'default value',
                             tournament: cards['tournament'] ?? 'default value',
                             date: cards['date'] ?? 'default value',
+                            tossWin: cards['tossWin'] ?? 'default value',
+                            decide: cards['decide'] ?? 'default value',
+                            team1Players: team1Player,
+                            team2Player: team2Player,
+                            team2Bowlers: team2Bowlers,
+                            team1Bowlers: team1Bowlers,
+                            inning1Overs: inning1Overs,
+                            inning2Overs: inning2Overs,
                           ));
                     },
                     child: MatchCardList(cards: cards));

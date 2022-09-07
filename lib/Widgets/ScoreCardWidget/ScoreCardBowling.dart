@@ -4,11 +4,18 @@ import '../../Common/Constants.dart';
 import 'ScoreCardBattingEntryWIdget.dart';
 import 'ScoreCardBowlingEntryWidget.dart';
 
-class ScoreCardBowling extends StatelessWidget {
+class ScoreCardBowling extends StatefulWidget {
   const ScoreCardBowling({
     Key? key,
+    required this.teamBowlers,
   }) : super(key: key);
+  final Map teamBowlers;
 
+  @override
+  State<ScoreCardBowling> createState() => _ScoreCardBowlingState();
+}
+
+class _ScoreCardBowlingState extends State<ScoreCardBowling> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -67,13 +74,28 @@ class ScoreCardBowling extends StatelessWidget {
             ),
           ),
         ),
-        const ScoreCardBowlingEntryWidget(),
-        const ScoreCardBowlingEntryWidget(),
-        const ScoreCardBowlingEntryWidget(),
-        const ScoreCardBowlingEntryWidget(),
-        const ScoreCardBowlingEntryWidget(),
-        const ScoreCardBowlingEntryWidget(),
-        const ScoreCardBowlingEntryWidget(),
+        Container(
+          height: 200,
+          child: ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: widget.teamBowlers.length,
+            itemBuilder: (BuildContext context, int index) {
+              String key = widget.teamBowlers.keys.elementAt(index);
+
+              return Column(
+                children: <Widget>[
+                  ScoreCardBowlingEntryWidget(
+                    name: "${widget.teamBowlers[key]['name']}",
+                    overs: "${widget.teamBowlers[key]['overs']}",
+                    runs: "${widget.teamBowlers[key]['runs']}",
+                    wickets: "${widget.teamBowlers[key]['wickets']}",
+                  ),
+                ],
+              );
+            },
+          ),
+        )
       ],
     );
   }

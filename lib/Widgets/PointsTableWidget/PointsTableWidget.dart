@@ -1,3 +1,5 @@
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:my_cricket/Common/Constants.dart';
 
@@ -12,6 +14,7 @@ class PointsTableWidget extends StatefulWidget {
 }
 
 class _PointsTableWidgetState extends State<PointsTableWidget> {
+  Query dbRef = FirebaseDatabase.instance.ref().child("allTeams");
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -149,12 +152,34 @@ class _PointsTableWidgetState extends State<PointsTableWidget> {
                     )
                   ],
                 ),
-                const PointsTableEntry(),
-                const CurrentPointTablesEntry(),
-                const PointsTableEntry(),
-                const CurrentPointTablesEntry(),
-                const PointsTableEntry(),
-                const PointsTableEntry(),
+                Container(
+                  height: 300,
+                  child: FirebaseAnimatedList(
+                    query: dbRef,
+                    itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                        Animation<double> animation, int index) {
+                      Map cards = snapshot.value as Map;
+
+                      cards['key'] = snapshot.key;
+                      print("${cards['matchWin']}");
+
+                      return CurrentPointTablesEntry(
+                        name: "${cards['name']}",
+                        matchPlayed: "${cards['matchPlayed']}",
+                        matchLost: "${cards['matchLost']}",
+                        matchWin: "${cards['matchWin']}",
+                        noResult: "${cards['noResult']}",
+                        serialNo: "${index + 1}",
+                      );
+                    },
+                  ),
+                ),
+                // const PointsTableEntry(),
+                // const CurrentPointTablesEntry(),
+                // const PointsTableEntry(),
+                // const CurrentPointTablesEntry(),
+                // const PointsTableEntry(),
+                // const PointsTableEntry(),
               ],
             ),
           ),

@@ -1,10 +1,32 @@
 import 'package:flutter/material.dart';
 
-class ScoreCardBattingEntryWidget extends StatelessWidget {
+class ScoreCardBattingEntryWidget extends StatefulWidget {
   const ScoreCardBattingEntryWidget({
     Key? key,
+    required this.playerName,
+    required this.runs,
+    required this.ballsFaced,
+    required this.fours,
+    required this.sixes,
+    required this.isOut,
+    required this.isPlaying,
   }) : super(key: key);
 
+  final String playerName;
+  final String runs;
+  final String ballsFaced;
+  final String fours;
+  final String sixes;
+  final bool isOut;
+  final bool isPlaying;
+
+  @override
+  State<ScoreCardBattingEntryWidget> createState() =>
+      _ScoreCardBattingEntryWidgetState();
+}
+
+class _ScoreCardBattingEntryWidgetState
+    extends State<ScoreCardBattingEntryWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,42 +37,45 @@ class ScoreCardBattingEntryWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Rizwan*',
+                '${widget.playerName}${widget.isOut == false ? '*' : ''}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
                     .copyWith(fontSize: 9, fontWeight: FontWeight.bold),
               ),
               Text(
-                '54',
+                widget.runs,
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
                     .copyWith(fontSize: 9, fontWeight: FontWeight.bold),
               ),
               Text(
-                '34',
+                widget.ballsFaced,
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
                     .copyWith(fontSize: 9, fontWeight: FontWeight.bold),
               ),
               Text(
-                '6',
+                widget.fours,
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
                     .copyWith(fontSize: 9, fontWeight: FontWeight.bold),
               ),
               Text(
-                '3',
+                widget.sixes,
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
                     .copyWith(fontSize: 9, fontWeight: FontWeight.bold),
               ),
               Text(
-                '176',
+                (double.parse(widget.runs) *
+                        100 /
+                        double.parse(widget.ballsFaced))
+                    .toStringAsFixed(1),
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!

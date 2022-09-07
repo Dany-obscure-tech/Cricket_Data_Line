@@ -3,7 +3,16 @@ import 'package:flutter/material.dart';
 import '../../Common/Constants.dart';
 
 class OverWidgetEntry extends StatefulWidget {
-  const OverWidgetEntry({Key? key}) : super(key: key);
+  const OverWidgetEntry(
+      {Key? key,
+      required this.overNo,
+      required this.bowlerName,
+      required this.fullOverData})
+      : super(key: key);
+
+  final String overNo;
+  final String bowlerName;
+  final fullOverData;
 
   @override
   State<OverWidgetEntry> createState() => _OverWidgetEntryState();
@@ -12,6 +21,7 @@ class OverWidgetEntry extends StatefulWidget {
 class _OverWidgetEntryState extends State<OverWidgetEntry> {
   @override
   Widget build(BuildContext context) {
+    print(widget.fullOverData[0]);
     return Row(
       children: [
         Padding(
@@ -23,7 +33,7 @@ class _OverWidgetEntryState extends State<OverWidgetEntry> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Ov 1',
+                    'Ov ${widget.overNo}',
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
@@ -57,25 +67,7 @@ class _OverWidgetEntryState extends State<OverWidgetEntry> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4.0),
                     child: Text(
-                      'Aamir',
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                            fontSize: 12,
-                          ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Text(
-                      'to',
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                            fontSize: 12,
-                          ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Text(
-                      'Sammy',
+                      widget.bowlerName,
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             fontSize: 12,
                           ),
@@ -83,152 +75,61 @@ class _OverWidgetEntryState extends State<OverWidgetEntry> {
                   ),
                 ],
               ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: blackColor)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                          '0',
-                          style:
-                              Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: blackColor)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Text(
-                          '1',
-                          style:
-                              Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: blackColor)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Text(
-                          '2',
-                          style:
-                              Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: blackColor)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Text(
-                          '3',
-                          style:
-                              Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: redAccent),
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Text(
-                          '4',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: whiteColor),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: blackColor),
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Text(
-                          '6',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: whiteColor),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: redColor),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Text(
-                          'w',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: whiteColor),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              Container(
+                width: MediaQuery.of(context).size.width * .6,
+                height: 30,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  // shrinkWrap: true,
+                  // physics: const NeverScrollableScrollPhysics(),
+                  itemCount: widget.fullOverData.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return BallEntry(
+                      entry: widget.fullOverData[index].toString(),
+                      color: widget.fullOverData[index].toString() == '6' ||
+                              widget.fullOverData[index].toString() == '4' ||
+                              widget.fullOverData[index].toString() == 'w'
+                          ? redAccent
+                          : blackColor,
+                    );
+                  },
+                ),
               ),
             ],
           ),
         ),
       ],
+    );
+  }
+}
+
+class BallEntry extends StatelessWidget {
+  const BallEntry({
+    Key? key,
+    required this.entry,
+    required this.color,
+  }) : super(key: key);
+  final String entry;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      child: Container(
+        decoration: BoxDecoration(
+            color: color,
+            shape: BoxShape.circle,
+            border: Border.all(color: color)),
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Text(
+            entry,
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                fontSize: 12, fontWeight: FontWeight.bold, color: whiteColor),
+          ),
+        ),
+      ),
     );
   }
 }

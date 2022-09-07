@@ -8,23 +8,31 @@ import 'OversWidget/OversWidget.dart';
 import 'PointsTableWidget/PointsTableWidget.dart';
 
 class MyTabBar extends StatefulWidget {
-  const MyTabBar(
-      {Key? key,
-      required this.team1,
-      required this.team2,
-      required this.team1Runs,
-      required this.team2Runs,
-      required this.category,
-      required this.team1Overs,
-      required this.team2Overs,
-      required this.startTime,
-      required this.location,
-      required this.onFieldEmp1,
-      required this.onFieldEmp2,
-      required this.referee,
-      required this.tournament,
-      required this.date})
-      : super(key: key);
+  const MyTabBar({
+    Key? key,
+    required this.team1,
+    required this.team2,
+    required this.team1Runs,
+    required this.team2Runs,
+    required this.category,
+    required this.team1Overs,
+    required this.team2Overs,
+    required this.startTime,
+    required this.location,
+    required this.onFieldEmp1,
+    required this.onFieldEmp2,
+    required this.referee,
+    required this.tournament,
+    required this.date,
+    required this.tossWin,
+    required this.decide,
+    required this.team1Players,
+    required this.team2Player,
+    required this.team1Bowlers,
+    required this.team2Bowlers,
+    required this.inning1Overs,
+    required this.inning2Overs,
+  }) : super(key: key);
 
   final String team1;
   final String team2;
@@ -40,6 +48,22 @@ class MyTabBar extends StatefulWidget {
   final String referee;
   final String tournament;
   final String date;
+  final String tossWin;
+  final String decide;
+
+  final Map team1Players;
+  final Map team2Player;
+  final Map team1Bowlers;
+  final Map team2Bowlers;
+  final Map inning1Overs;
+  final Map inning2Overs;
+
+  // final String playerName;
+  // final String runs;
+  // final String ballsFaced;
+  // final String fours;
+  // final String sixes;
+  // final bool isOut;
 
   @override
   State<MyTabBar> createState() => _TabBarState();
@@ -59,7 +83,7 @@ class _TabBarState extends State<MyTabBar> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: GestureDetector(
                         onTap: () {
                           Get.back();
@@ -237,8 +261,24 @@ class _TabBarState extends State<MyTabBar> {
                                 date: widget.date,
                                 tournament: widget.tournament,
                               ),
-                              ScoreCardWidget(),
-                              OversWidget(),
+                              ScoreCardWidget(
+                                team1: widget.team1,
+                                team2: widget.team2,
+                                team1Score: widget.team1Runs,
+                                team2Score: widget.team2Runs,
+                                team1Overs: widget.team1Overs,
+                                team2Overs: widget.team2Overs,
+                                tossWin: widget.tossWin,
+                                decide: widget.decide,
+                                team1Players: widget.team1Players,
+                                team2Player: widget.team2Player,
+                                team1Bowlers: widget.team1Bowlers,
+                                team2Bowlers: widget.team2Bowlers,
+                              ),
+                              OversWidget(
+                                inning1Overs: widget.inning1Overs,
+                                inning2Overs: widget.inning2Overs,
+                              ),
                               PointsTableWidget(),
                             ]))
                       ])),

@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
 
-class ScoreCardBowlingEntryWidget extends StatelessWidget {
+class ScoreCardBowlingEntryWidget extends StatefulWidget {
   const ScoreCardBowlingEntryWidget({
     Key? key,
+    required this.name,
+    required this.overs,
+    required this.runs,
+    required this.wickets,
   }) : super(key: key);
 
+  final String name;
+  final String overs;
+  final String runs;
+  final String wickets;
+
+  @override
+  State<ScoreCardBowlingEntryWidget> createState() =>
+      _ScoreCardBowlingEntryWidgetState();
+}
+
+class _ScoreCardBowlingEntryWidgetState
+    extends State<ScoreCardBowlingEntryWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,14 +31,14 @@ class ScoreCardBowlingEntryWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Waseem*',
+                widget.name,
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
                     .copyWith(fontSize: 9, fontWeight: FontWeight.bold),
               ),
               Text(
-                '54',
+                widget.overs,
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
@@ -36,21 +52,22 @@ class ScoreCardBowlingEntryWidget extends StatelessWidget {
                     .copyWith(fontSize: 9, fontWeight: FontWeight.bold),
               ),
               Text(
-                '4',
+                widget.runs,
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
                     .copyWith(fontSize: 9, fontWeight: FontWeight.bold),
               ),
               Text(
-                '3',
+                widget.wickets,
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
                     .copyWith(fontSize: 9, fontWeight: FontWeight.bold),
               ),
               Text(
-                '6.3',
+                (double.parse(widget.runs) / double.parse(widget.overs))
+                    .toStringAsFixed(1),
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
