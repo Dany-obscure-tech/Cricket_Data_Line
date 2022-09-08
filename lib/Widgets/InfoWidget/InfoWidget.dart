@@ -19,6 +19,8 @@ class InfoWidget extends StatefulWidget {
     required this.tournament,
     required this.category,
     required this.date,
+    required this.team1Players,
+    required this.team2Player,
   }) : super(key: key);
 
   final String team1;
@@ -31,6 +33,9 @@ class InfoWidget extends StatefulWidget {
   final String tournament;
   final String category;
   final String date;
+
+  final Map team1Players;
+  final Map team2Player;
 
   @override
   State<InfoWidget> createState() => _InfoWidgetState();
@@ -82,7 +87,9 @@ class _InfoWidgetState extends State<InfoWidget> {
                           showDialog(
                               context: context,
                               builder: (ctxt) {
-                                return const SquadWidget();
+                                return SquadWidget(
+                                  teamPlayers: widget.team1Players,
+                                );
                               });
                         },
                         child: SquadTab(
@@ -93,7 +100,9 @@ class _InfoWidgetState extends State<InfoWidget> {
                           showDialog(
                               context: context,
                               builder: (ctxt) {
-                                return const SquadWidget();
+                                return SquadWidget(
+                                  teamPlayers: widget.team2Player,
+                                );
                               });
                         },
                         child: SquadTab(

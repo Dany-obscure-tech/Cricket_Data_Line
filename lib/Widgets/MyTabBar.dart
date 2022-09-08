@@ -260,6 +260,8 @@ class _TabBarState extends State<MyTabBar> {
                                 category: widget.category,
                                 date: widget.date,
                                 tournament: widget.tournament,
+                                team1Players: widget.team1Players,
+                                team2Player: widget.team2Player,
                               ),
                               ScoreCardWidget(
                                 team1: widget.team1,

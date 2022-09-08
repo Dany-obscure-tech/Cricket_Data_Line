@@ -51,6 +51,7 @@ class ScoreCardWidget extends StatefulWidget {
 
 class _ScoreCardWidgetState extends State<ScoreCardWidget> {
   var _tabTextIndexSelected = 0;
+  var _tab2TextIndexSelected = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -302,7 +303,52 @@ class _ScoreCardWidgetState extends State<ScoreCardWidget> {
                     : ScoreCardBattingWidget(
                         teamPlayers: widget.team2Player,
                       ),
-                _tabTextIndexSelected == 0
+                const SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    FlutterToggleTab(
+// width in percent
+                      width: MediaQuery.of(context).size.width * .1,
+                      borderRadius: 30,
+                      height: 35,
+                      selectedIndex: _tab2TextIndexSelected,
+                      selectedBackgroundColors: const [
+                        Colors.blue,
+                        Colors.blueAccent
+                      ],
+                      selectedTextStyle: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(
+                              color: whiteColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700),
+
+                      unSelectedTextStyle: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(
+                              color: blackColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500),
+
+                      labels: [widget.team1, widget.team2],
+                      selectedLabelIndex: (index) {
+                        setState(() {
+                          _tab2TextIndexSelected = index;
+                        });
+                      },
+                      isScroll: false,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                _tab2TextIndexSelected == 0
                     ? ScoreCardBowling(
                         teamBowlers: widget.team1Bowlers,
                       )

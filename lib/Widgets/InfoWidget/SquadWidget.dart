@@ -8,11 +8,18 @@ import '../../Common/Constants.dart';
 import 'AllSquad.dart';
 import 'SquadEntry.dart';
 
-class SquadWidget extends StatelessWidget {
+class SquadWidget extends StatefulWidget {
   const SquadWidget({
     Key? key,
+    required this.teamPlayers,
   }) : super(key: key);
+  final Map teamPlayers;
 
+  @override
+  State<SquadWidget> createState() => _SquadWidgetState();
+}
+
+class _SquadWidgetState extends State<SquadWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,11 +93,19 @@ class SquadWidget extends StatelessWidget {
                                 height: MediaQuery.of(context).size.height /
                                     1.7, //height of TabBarView
                                 // color: whiteColor,
-                                child: const TabBarView(children: <Widget>[
-                                  AllSquad(),
-                                  BatSquad(),
-                                  BowlSquad(),
-                                  ARSquad(),
+                                child: TabBarView(children: <Widget>[
+                                  AllSquad(
+                                    teamPlayers: widget.teamPlayers,
+                                  ),
+                                  BatSquad(
+                                    teamPlayers: widget.teamPlayers,
+                                  ),
+                                  BowlSquad(
+                                    teamPlayers: widget.teamPlayers,
+                                  ),
+                                  ARSquad(
+                                    teamPlayers: widget.teamPlayers,
+                                  ),
                                 ]))
                           ]))
                 ],
