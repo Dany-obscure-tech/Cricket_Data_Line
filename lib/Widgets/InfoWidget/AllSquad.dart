@@ -14,6 +14,16 @@ class AllSquad extends StatefulWidget {
 }
 
 class _AllSquadState extends State<AllSquad> {
+  getData() {
+    print(widget.teamPlayers);
+  }
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -32,6 +42,7 @@ class _AllSquadState extends State<AllSquad> {
             category: "${widget.teamPlayers[key]['category']}",
             isCaptain: widget.teamPlayers[key]['isCaptain'],
             isWicketKeeper: widget.teamPlayers[key]['isWicketKeeper'],
+            imageUrl: widget.teamPlayers[key]['imageUrl'],
           );
         },
       ),

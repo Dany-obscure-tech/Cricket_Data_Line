@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_cricket/Common/Constants.dart';
 import 'package:my_cricket/pages/International.dart';
-import 'package:my_cricket/pages/Local.dart';
 
 import '../main.dart';
+import 'NewLocal.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -15,7 +15,10 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[International(), Local()];
+  static const List<Widget> _widgetOptions = <Widget>[
+    International(),
+    NewLocal()
+  ];
 
   void _onItemTapped(int index) {
     setState(() {

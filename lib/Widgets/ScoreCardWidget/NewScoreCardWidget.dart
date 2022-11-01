@@ -1,55 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
-import 'package:my_cricket/Widgets/ScoreCardWidget/FallOfWicketsWidget.dart';
-import 'package:my_cricket/Widgets/ScoreCardWidget/ScoreCardBowling.dart';
+import 'package:my_cricket/main.dart';
 
 import '../../Common/Constants.dart';
+import 'FallOfWicketsWidget.dart';
 import 'ScoreCardBattingWidget.dart';
+import 'ScoreCardBowling.dart';
 import 'ScoreCardYetToBatWidget.dart';
 
-class ScoreCardWidget extends StatefulWidget {
-  const ScoreCardWidget({
+class NewScoreCardWidget extends StatefulWidget {
+  const NewScoreCardWidget({
     Key? key,
-    required this.team1,
-    required this.team2,
-    required this.team1Score,
-    required this.team2Score,
-    required this.team1Overs,
-    required this.team2Overs,
-    required this.tossWin,
-    required this.decide,
-    required this.team1Players,
-    required this.team2Player,
-    required this.team1Bowlers,
-    required this.team2Bowlers,
+    required this.myMap,
   }) : super(key: key);
 
-  final String team1;
-  final String team2;
-  final String team1Score;
-  final String team2Score;
-  final String team1Overs;
-  final String team2Overs;
-  final String tossWin;
-  final String decide;
-
-  final Map team1Players;
-  final Map team2Player;
-  final Map team1Bowlers;
-  final Map team2Bowlers;
-
-  // final String playerName;
-  // final String runs;
-  // final String ballsFaced;
-  // final String fours;
-  // final String sixes;
-  // final bool isOut;
+  final Map myMap;
 
   @override
-  State<ScoreCardWidget> createState() => _ScoreCardWidgetState();
+  State<NewScoreCardWidget> createState() => _NewScoreCardWidgetState();
 }
 
-class _ScoreCardWidgetState extends State<ScoreCardWidget> {
+class _NewScoreCardWidgetState extends State<NewScoreCardWidget> {
   var _tabTextIndexSelected = 0;
   var _tab2TextIndexSelected = 1;
 
@@ -91,7 +62,7 @@ class _ScoreCardWidgetState extends State<ScoreCardWidget> {
                     ),
                     FlutterToggleTab(
 // width in percent
-                      width: MediaQuery.of(context).size.width * .1,
+                      width: MediaQuery.of(context).size.width * .15,
                       borderRadius: 30,
                       height: 35,
                       selectedIndex: _tabTextIndexSelected,
@@ -115,7 +86,22 @@ class _ScoreCardWidgetState extends State<ScoreCardWidget> {
                               fontSize: 14,
                               fontWeight: FontWeight.w500),
 
-                      labels: [widget.team1, widget.team2],
+                      labels: [
+                        (widget.myMap['Inning1'] != null
+                            ? widget.myMap['Inning1']['battingTeam']
+                                .toString()
+                                .substring(0, 5)
+                            : widget.myMap['team1Name']
+                                .toString()
+                                .substring(0, 5)),
+                        (widget.myMap['Inning2'] != null
+                            ? widget.myMap['Inning2']['battingTeam']
+                                .toString()
+                                .substring(0, 5)
+                            : widget.myMap['team2Name']
+                                .toString()
+                                .substring(0, 5))
+                      ],
                       selectedLabelIndex: (index) {
                         setState(() {
                           _tabTextIndexSelected = index;
@@ -158,7 +144,7 @@ class _ScoreCardWidgetState extends State<ScoreCardWidget> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: Text(
-                                  widget.team1,
+                                  '${widget.myMap['Inning1'] != null ? widget.myMap['Inning1']['battingTeam'].toString() : widget.myMap['team1Name']}',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
@@ -170,7 +156,7 @@ class _ScoreCardWidgetState extends State<ScoreCardWidget> {
                           Row(
                             children: [
                               Text(
-                                widget.team1,
+                                "${widget.myMap['Inning1'] != null ? widget.myMap['Inning1']['battingTeam'].toString() : widget.myMap['team1Name']}",
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyLarge!
@@ -182,7 +168,9 @@ class _ScoreCardWidgetState extends State<ScoreCardWidget> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 4.0),
                                 child: Text(
-                                  widget.team1Score,
+                                  widget.myMap['Inning1'] != null
+                                      ? "${widget.myMap['Inning1']['totalRuns'].toString()}-${widget.myMap['Inning1']['wicketsDown'].toString()}"
+                                      : '0-0',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
@@ -192,7 +180,7 @@ class _ScoreCardWidgetState extends State<ScoreCardWidget> {
                                 ),
                               ),
                               Text(
-                                '(${widget.team1Overs})',
+                                "(${widget.myMap['Inning1'] != null ? (widget.myMap['Inning1']['currentOverNo'] == 0 ? "0.${widget.myMap['Inning1']['ballOfTheOver']}" : "${widget.myMap['Inning1']['currentOverNo'] - 1}.${widget.myMap['Inning1']['ballOfTheOver']}") : "0.0"})",
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyLarge!
@@ -233,7 +221,7 @@ class _ScoreCardWidgetState extends State<ScoreCardWidget> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: Text(
-                                  widget.team2,
+                                  "${widget.myMap['Inning2'] != null ? widget.myMap['Inning2']['battingTeam'].toString() : widget.myMap['team2Name']}",
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
@@ -245,7 +233,7 @@ class _ScoreCardWidgetState extends State<ScoreCardWidget> {
                           Row(
                             children: [
                               Text(
-                                widget.team2,
+                                "${widget.myMap['Inning2'] != null ? widget.myMap['Inning2']['battingTeam'].toString() : widget.myMap['team2Name']}",
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyLarge!
@@ -257,7 +245,9 @@ class _ScoreCardWidgetState extends State<ScoreCardWidget> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 4.0),
                                 child: Text(
-                                  widget.team2Score,
+                                  widget.myMap['Inning2'] != null
+                                      ? "${widget.myMap['Inning2']['totalRuns'].toString()}-${widget.myMap['Inning2']['wicketsDown'].toString()}"
+                                      : '0-0',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
@@ -267,7 +257,7 @@ class _ScoreCardWidgetState extends State<ScoreCardWidget> {
                                 ),
                               ),
                               Text(
-                                '(${widget.team2Overs})',
+                                "(${widget.myMap['Inning2'] != null ? (widget.myMap['Inning2']['currentOverNo'] == 0 ? "0.${widget.myMap['Inning2']['ballOfTheOver']}" : "${widget.myMap['Inning2']['currentOverNo'] - 1}.${widget.myMap['Inning2']['ballOfTheOver']}") : "0.0"})",
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyLarge!
@@ -285,7 +275,7 @@ class _ScoreCardWidgetState extends State<ScoreCardWidget> {
                 Row(
                   children: [
                     Text(
-                      '${widget.tossWin} won the toss & decided to ${widget.decide}',
+                      '${widget.myMap['winningMsg']}',
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge!
@@ -298,10 +288,10 @@ class _ScoreCardWidgetState extends State<ScoreCardWidget> {
                 ),
                 _tabTextIndexSelected == 0
                     ? ScoreCardBattingWidget(
-                        teamPlayers: widget.team1Players,
+                        teamPlayers: widget.myMap['1InningBattingData'],
                       )
                     : ScoreCardBattingWidget(
-                        teamPlayers: widget.team2Player,
+                        teamPlayers: widget.myMap['2InningBattingData'],
                       ),
                 const SizedBox(
                   height: 5,
@@ -311,7 +301,7 @@ class _ScoreCardWidgetState extends State<ScoreCardWidget> {
                   children: [
                     FlutterToggleTab(
 // width in percent
-                      width: MediaQuery.of(context).size.width * .1,
+                      width: MediaQuery.of(context).size.width * .15,
                       borderRadius: 30,
                       height: 35,
                       selectedIndex: _tab2TextIndexSelected,
@@ -335,7 +325,22 @@ class _ScoreCardWidgetState extends State<ScoreCardWidget> {
                               fontSize: 14,
                               fontWeight: FontWeight.w500),
 
-                      labels: [widget.team1, widget.team2],
+                      labels: [
+                        (widget.myMap['Inning1'] != null
+                            ? widget.myMap['Inning1']['battingTeam']
+                                .toString()
+                                .substring(0, 5)
+                            : widget.myMap['team1Name']
+                                .toString()
+                                .substring(0, 5)),
+                        (widget.myMap['Inning2'] != null
+                            ? widget.myMap['Inning2']['battingTeam']
+                                .toString()
+                                .substring(0, 5)
+                            : widget.myMap['team2Name']
+                                .toString()
+                                .substring(0, 5))
+                      ],
                       selectedLabelIndex: (index) {
                         setState(() {
                           _tab2TextIndexSelected = index;
@@ -350,12 +355,16 @@ class _ScoreCardWidgetState extends State<ScoreCardWidget> {
                 ),
                 _tab2TextIndexSelected == 0
                     ? ScoreCardBowling(
-                        teamBowlers: widget.team1Bowlers,
+                        teamBowlers: widget.myMap['2InningBowlingData'],
                       )
                     : ScoreCardBowling(
-                        teamBowlers: widget.team2Bowlers,
+                        teamBowlers: widget.myMap['1InningBowlingData'],
                       ),
-                const ScoreCardYetToBatWidget(),
+                _tabTextIndexSelected == 0
+                    ? ScoreCardYetToBatWidget(
+                        myMap: widget.myMap['1InningBattingData'])
+                    : ScoreCardYetToBatWidget(
+                        myMap: widget.myMap['2InningBattingData']),
                 const FallOfWicketsWidget()
               ],
             ),

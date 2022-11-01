@@ -43,13 +43,6 @@ class _ScoreCardBowlingState extends State<ScoreCardBowling> {
                       color: whiteColor),
                 ),
                 Text(
-                  'M',
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontSize: 9,
-                      fontWeight: FontWeight.bold,
-                      color: whiteColor),
-                ),
-                Text(
                   'R',
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                       fontSize: 9,
@@ -75,7 +68,7 @@ class _ScoreCardBowlingState extends State<ScoreCardBowling> {
           ),
         ),
         Container(
-          height: 200,
+          height: 350,
           child: ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -90,6 +83,7 @@ class _ScoreCardBowlingState extends State<ScoreCardBowling> {
                     overs: "${widget.teamBowlers[key]['overs']}",
                     runs: "${widget.teamBowlers[key]['runs']}",
                     wickets: "${widget.teamBowlers[key]['wickets']}",
+                    balls: "${widget.teamBowlers[key]['totalBalls']}",
                   ),
                 ],
               );

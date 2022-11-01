@@ -16,6 +16,11 @@ class ScoreCardBattingWidget extends StatefulWidget {
 
 class _ScoreCardBattingWidgetState extends State<ScoreCardBattingWidget> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -74,7 +79,7 @@ class _ScoreCardBattingWidgetState extends State<ScoreCardBattingWidget> {
           ),
         ),
         Container(
-          height: 200,
+          height: 350,
           child: ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -87,12 +92,12 @@ class _ScoreCardBattingWidgetState extends State<ScoreCardBattingWidget> {
                   ScoreCardBattingEntryWidget(
                     playerName: "${widget.teamPlayers[key]['name']}",
                     runs: "${widget.teamPlayers[key]['runs']}",
-                    ballsFaced: "${widget.teamPlayers[key]['ballsFaced']}",
-                    fours: "${widget.teamPlayers[key]['fours']}",
-                    sixes: "${widget.teamPlayers[key]['sixes']}",
+                    ballsFaced: "${widget.teamPlayers[key]['balls']}",
+                    fours: "${widget.teamPlayers[key]['noOf4s']}",
+                    sixes: "${widget.teamPlayers[key]['noOf6s']}",
                     isOut: "${widget.teamPlayers[key]['isOut']}" == 'true',
                     isPlaying:
-                        "${widget.teamPlayers[key]['isPlaying']}" == 'true',
+                        "${widget.teamPlayers[key]['isBatting']}" == 'true',
                   ),
                 ],
               );

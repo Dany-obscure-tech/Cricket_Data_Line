@@ -37,6 +37,7 @@ class _ARSquadState extends State<ARSquad> {
             category: "${l[index]['category']}",
             isCaptain: l[index]['isCaptain'] ?? false,
             isWicketKeeper: l[index]['isWicketKeeper'] ?? false,
+            imageUrl: l[index]['imageUrl'],
           );
         },
       ),

@@ -6,42 +6,28 @@ import 'SquadEntry.dart';
 import 'SquadTab.dart';
 import 'SquadWidget.dart';
 
-class InfoWidget extends StatefulWidget {
-  const InfoWidget({
+class NewInfoWidget extends StatefulWidget {
+  const NewInfoWidget({
     Key? key,
-    required this.team1,
-    required this.team2,
-    required this.startTime,
-    required this.location,
-    required this.onFieldEmp1,
-    required this.onFieldEmp2,
-    required this.refree,
-    required this.tournament,
-    required this.category,
-    required this.date,
-    required this.team1Players,
-    required this.team2Player,
+    required this.myMap,
+    required this.team1ImageUrl,
+    required this.team2ImageUrl,
   }) : super(key: key);
 
-  final String team1;
-  final String team2;
-  final String startTime;
-  final String location;
-  final String onFieldEmp1;
-  final String onFieldEmp2;
-  final String refree;
-  final String tournament;
-  final String category;
-  final String date;
-
-  final Map team1Players;
-  final Map team2Player;
+  final Map myMap;
+  final String team1ImageUrl;
+  final String team2ImageUrl;
 
   @override
-  State<InfoWidget> createState() => _InfoWidgetState();
+  State<NewInfoWidget> createState() => _NewInfoWidgetState();
 }
 
-class _InfoWidgetState extends State<InfoWidget> {
+class _NewInfoWidgetState extends State<NewInfoWidget> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -88,12 +74,16 @@ class _InfoWidgetState extends State<InfoWidget> {
                               context: context,
                               builder: (ctxt) {
                                 return SquadWidget(
-                                  teamPlayers: widget.team1Players,
+                                  teamPlayers:
+                                      widget.myMap['1InningBattingData'] ??
+                                          widget.myMap['team1Players'],
                                 );
                               });
                         },
                         child: SquadTab(
-                          name: widget.team1,
+                          name:
+                              '${widget.myMap['Inning1'] != null ? widget.myMap['Inning1']['battingTeam'].toString() : widget.myMap['team1Name']}',
+                          url: widget.team1ImageUrl,
                         )),
                     GestureDetector(
                         onTap: () {
@@ -101,12 +91,16 @@ class _InfoWidgetState extends State<InfoWidget> {
                               context: context,
                               builder: (ctxt) {
                                 return SquadWidget(
-                                  teamPlayers: widget.team2Player,
+                                  teamPlayers:
+                                      widget.myMap['2InningBattingData'] ??
+                                          widget.myMap['team2Players'],
                                 );
                               });
                         },
                         child: SquadTab(
-                          name: widget.team2,
+                          url: widget.team2ImageUrl,
+                          name:
+                              "${widget.myMap['Inning2'] != null ? widget.myMap['Inning2']['battingTeam'].toString() : widget.myMap['team2Name']}",
                         )),
                   ],
                 ),
@@ -154,7 +148,7 @@ class _InfoWidgetState extends State<InfoWidget> {
                                       ),
                                 ),
                                 Text(
-                                  '2nd ${widget.category}, ${widget.category}, ${widget.tournament}, 2021-22',
+                                  '2nd widget.category, widget.category, widget.tournament, 2021-22',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
@@ -178,7 +172,7 @@ class _InfoWidgetState extends State<InfoWidget> {
                                       ),
                                 ),
                                 Text(
-                                  '${widget.startTime}, ${widget.date}',
+                                  widget.myMap['timeStamp'] ?? 'default',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
@@ -202,7 +196,7 @@ class _InfoWidgetState extends State<InfoWidget> {
                                       ),
                                 ),
                                 Text(
-                                  widget.location,
+                                  "location",
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
@@ -226,7 +220,7 @@ class _InfoWidgetState extends State<InfoWidget> {
                                       ),
                                 ),
                                 Text(
-                                  '${widget.onFieldEmp1}(on Field), ${widget.onFieldEmp1}(on Field), ${widget.refree}(referee)',
+                                  'Match Official(on Field), Match Official(on Field), Match Official(referee)',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!

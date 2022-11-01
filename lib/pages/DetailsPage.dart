@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_cricket/Widgets/MyTabBar.dart';
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({Key? key}) : super(key: key);

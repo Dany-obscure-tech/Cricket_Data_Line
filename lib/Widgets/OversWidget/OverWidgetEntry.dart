@@ -1,18 +1,20 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 
 import '../../Common/Constants.dart';
 
 class OverWidgetEntry extends StatefulWidget {
-  const OverWidgetEntry(
-      {Key? key,
-      required this.overNo,
-      required this.bowlerName,
-      required this.fullOverData})
-      : super(key: key);
+  const OverWidgetEntry({
+    Key? key,
+    required this.overNo,
+    required this.bowlerName,
+    required this.fullOverData,
+  }) : super(key: key);
 
   final String overNo;
   final String bowlerName;
-  final fullOverData;
+  final List fullOverData;
 
   @override
   State<OverWidgetEntry> createState() => _OverWidgetEntryState();
@@ -33,18 +35,12 @@ class _OverWidgetEntryState extends State<OverWidgetEntry> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Ov ${widget.overNo}',
+                    widget.overNo != null ? 'Ov ${widget.overNo}' : "",
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
                         .copyWith(fontSize: 12, fontWeight: FontWeight.bold),
                   ),
-                  Text(
-                    '16 runs',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          fontSize: 10,
-                        ),
-                  )
                 ],
               ),
             ],
@@ -75,26 +71,51 @@ class _OverWidgetEntryState extends State<OverWidgetEntry> {
                   ),
                 ],
               ),
-              Container(
-                width: MediaQuery.of(context).size.width * .6,
-                height: 30,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  // shrinkWrap: true,
-                  // physics: const NeverScrollableScrollPhysics(),
-                  itemCount: widget.fullOverData.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return BallEntry(
-                      entry: widget.fullOverData[index].toString(),
-                      color: widget.fullOverData[index].toString() == '6' ||
-                              widget.fullOverData[index].toString() == '4' ||
-                              widget.fullOverData[index].toString() == 'w'
-                          ? redAccent
-                          : blackColor,
-                    );
-                  },
-                ),
-              ),
+              widget.fullOverData[0] != ""
+                  ? Container(
+                      width: MediaQuery.of(context).size.width * .6,
+                      height: 30,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        // shrinkWrap: true,
+                        // physics: const NeverScrollableScrollPhysics(),
+                        itemCount: widget.fullOverData.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return BallEntry(
+                            entry: widget.fullOverData[index].toString(),
+                            color: widget.fullOverData[index].toString() ==
+                                        '6' ||
+                                    widget.fullOverData[index].toString() ==
+                                        '4' ||
+                                    widget.fullOverData[index].toString() ==
+                                        'st' ||
+                                    widget.fullOverData[index].toString() ==
+                                        'c' ||
+                                    widget.fullOverData[index].toString() ==
+                                        'b' ||
+                                    widget.fullOverData[index].toString() ==
+                                        '0r' ||
+                                    widget.fullOverData[index].toString() ==
+                                        '1r' ||
+                                    widget.fullOverData[index].toString() ==
+                                        '2r' ||
+                                    widget.fullOverData[index].toString() ==
+                                        '3r' ||
+                                    widget.fullOverData[index].toString() ==
+                                        '4r' ||
+                                    widget.fullOverData[index].toString() ==
+                                        '5r' ||
+                                    widget.fullOverData[index].toString() ==
+                                        '6r' ||
+                                    widget.fullOverData[index].toString() ==
+                                        '7r'
+                                ? redAccent
+                                : blackColor,
+                          );
+                        },
+                      ),
+                    )
+                  : Container()
             ],
           ),
         ),

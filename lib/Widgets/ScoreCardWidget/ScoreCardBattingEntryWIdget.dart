@@ -37,45 +37,52 @@ class _ScoreCardBattingEntryWidgetState
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${widget.playerName}${widget.isOut == false ? '*' : ''}',
+                '${widget.playerName}${widget.isPlaying == true ? '*' : ''}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
                     .copyWith(fontSize: 9, fontWeight: FontWeight.bold),
               ),
               Text(
-                widget.runs,
+                !widget.isPlaying && !widget.isOut ? '' : widget.runs,
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
                     .copyWith(fontSize: 9, fontWeight: FontWeight.bold),
               ),
               Text(
-                widget.ballsFaced,
+                !widget.isPlaying && !widget.isOut ? '' : widget.ballsFaced,
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
                     .copyWith(fontSize: 9, fontWeight: FontWeight.bold),
               ),
               Text(
-                widget.fours,
+                !widget.isPlaying && !widget.isOut ? '' : widget.fours,
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
                     .copyWith(fontSize: 9, fontWeight: FontWeight.bold),
               ),
               Text(
-                widget.sixes,
+                !widget.isPlaying && !widget.isOut ? '' : widget.sixes,
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
                     .copyWith(fontSize: 9, fontWeight: FontWeight.bold),
               ),
               Text(
-                (double.parse(widget.runs) *
-                        100 /
-                        double.parse(widget.ballsFaced))
-                    .toStringAsFixed(1),
+                !widget.isPlaying && !widget.isOut
+                    ? ''
+                    : ((double.parse(widget.runs) *
+                                    100 /
+                                    double.parse(widget.ballsFaced))
+                                .isNaN
+                            ? 0
+                            : (double.parse(widget.runs) *
+                                100 /
+                                double.parse(widget.ballsFaced)))
+                        .toStringAsFixed(1),
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!

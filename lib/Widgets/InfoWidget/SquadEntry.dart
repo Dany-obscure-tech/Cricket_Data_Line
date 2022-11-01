@@ -7,11 +7,13 @@ class SquadEntry extends StatelessWidget {
     required this.category,
     required this.isCaptain,
     required this.isWicketKeeper,
+    required this.imageUrl,
   }) : super(key: key);
   final String name;
   final String category;
   final bool isCaptain;
   final bool isWicketKeeper;
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -19,29 +21,23 @@ class SquadEntry extends StatelessWidget {
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
+          children: [
             SizedBox(height: 10),
             CircleAvatar(
-              radius: 18, // Image radius
-              backgroundImage: AssetImage(
-                'assets/images/pak.png',
-              ),
-            ),
+                radius: 18, // Image radius
+                backgroundImage: imageUrl != ""
+                    ? NetworkImage(imageUrl)
+                    : const AssetImage('assets/images/pak.png')
+                        as ImageProvider),
           ],
         ),
         const SizedBox(width: 5),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 8),
             Text(
               name,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge!
-                  .copyWith(fontSize: 12, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              "${isWicketKeeper ? '(W)' : ''}${isCaptain ? '(C)' : ''}",
               style: Theme.of(context)
                   .textTheme
                   .bodyLarge!
@@ -52,6 +48,13 @@ class SquadEntry extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     fontSize: 10,
                   ),
+            ),
+            Text(
+              "${isWicketKeeper ? '(W)' : ''}${isCaptain ? '(C)' : ''}",
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge!
+                  .copyWith(fontSize: 12, fontWeight: FontWeight.bold),
             ),
           ],
         )

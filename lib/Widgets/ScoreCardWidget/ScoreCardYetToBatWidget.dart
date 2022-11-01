@@ -5,7 +5,9 @@ import '../../Common/Constants.dart';
 class ScoreCardYetToBatWidget extends StatelessWidget {
   const ScoreCardYetToBatWidget({
     Key? key,
+    required this.myMap,
   }) : super(key: key);
+  final Map myMap;
 
   @override
   Widget build(BuildContext context) {
@@ -38,26 +40,35 @@ class ScoreCardYetToBatWidget extends StatelessWidget {
           child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              itemCount: 15,
+              itemCount: myMap.length,
               itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                  child: Column(
-                    children: [
-                      const CircleAvatar(
-                        radius: 30, // Image radius
-                        backgroundImage: AssetImage(
-                          'assets/images/pak.png',
+                String key = myMap.keys.elementAt(index);
+                return !myMap[key]['isOut'] && !myMap[key]['isBatting']
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              radius: 30, // Image radius
+                              backgroundImage: myMap[key]['imageUrl'] != ""
+                                  ? NetworkImage(myMap[key]['imageUrl'])
+                                  : const AssetImage(
+                                      'assets/images/pak.png',
+                                    ) as ImageProvider,
+                            ),
+                            Text(
+                              myMap[key]['name'],
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500),
+                            )
+                          ],
                         ),
-                      ),
-                      Text(
-                        'Rizwan',
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                            fontSize: 12, fontWeight: FontWeight.w500),
                       )
-                    ],
-                  ),
-                );
+                    : Container();
               }),
         ),
       ],

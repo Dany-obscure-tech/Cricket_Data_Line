@@ -6,9 +6,11 @@ class SquadTab extends StatefulWidget {
   const SquadTab({
     Key? key,
     required this.name,
+    required this.url,
   }) : super(key: key);
 
   final String name;
+  final String url;
 
   @override
   State<SquadTab> createState() => _SquadTabState();
@@ -49,10 +51,13 @@ class _SquadTabState extends State<SquadTab> {
                             height: 30,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                image: const DecorationImage(
+                                image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image:
-                                        AssetImage('assets/images/pak.png'))),
+                                    image: widget.url != ""
+                                        ? NetworkImage(widget.url)
+                                        : const AssetImage(
+                                                'assets/images/pak.png')
+                                            as ImageProvider)),
                           ),
                         ),
                       ),
